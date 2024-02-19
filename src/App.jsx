@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
-// import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import RecipeDetail from "./components/RecipeDetail";
 import BackToTop from "./components/BackToTop";
+import Saved from "./components/Saved";
 
 function App() {
   const [input, setInput] = useState("");
@@ -11,10 +12,10 @@ function App() {
   const navigate = useNavigate();
   return (
     <div>
-      {/* <div className="fixed top-0 w-full lg:bg-amber-300/90 z-10">
+      <div className="fixed top-0 w-full lg:bg-amber-300/90 z-10">
         <Navbar />
-      </div> */}
-      <div className="mt-6 md:mt-16">
+      </div>
+      <div>
         {/* if navbar than mt-32 */}
         <Routes>
           <Route
@@ -30,6 +31,7 @@ function App() {
             }
           />
           <Route path="/:id" element={<RecipeDetail />} />
+          <Route path="/saved" element={<Saved />} />
         </Routes>
       </div>
       <BackToTop />

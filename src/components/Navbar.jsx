@@ -54,7 +54,7 @@ function Navbar() {
           <div className="flex justify-center flex-col mt-8 items-center">
             <button
               onClick={handleOpen}
-              className={`flex justify-center items-center ${
+              className={`flex justify-center items-center rounded-t-2xl ${
                 open && "bg-amber-300/90"
               } w-36 py-2`}
             >
@@ -65,7 +65,7 @@ function Navbar() {
               )}
             </button>
             {open && (
-              <div className="flex flex-col justify-center items-center bg-amber-300/90 w-36">
+              <div className="flex flex-col justify-center items-center bg-amber-300/90 w-36 rounded-b-2xl">
                 <ul className="flex flex-col justify-center items-center py-2">
                   <Link to="/">
                     <li className="text-xl font-medium cursor-pointer py-2">

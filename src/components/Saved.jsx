@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { InfinitySpin } from "react-loader-spinner";
+import arrow from "../assets/arrow.svg";
 
 function Saved() {
   const [data, setData] = useState([]);
@@ -24,6 +25,10 @@ function Saved() {
     setData(updatedRecipe);
     localStorage.setItem("recipe", JSON.stringify(updatedRecipe));
     alert("Recipe Deleted");
+  };
+
+  const goBack = () => {
+    window.history.back();
   };
 
   if (data.length === 0 && !isLoading) {
@@ -77,6 +82,12 @@ function Saved() {
                   Delete
                 </button>
               </div>
+              <button
+                onClick={goBack}
+                className="absolute top-24 left-2 md:left-10 border-2 md:border-4 border-black rounded-full p-1 md:p-2"
+              >
+                <img src={arrow} className="h-4 w-4 md:h-6 md:w-6" />
+              </button>
             </div>
           ))
         )}

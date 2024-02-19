@@ -54,7 +54,7 @@ function RecipeDetail() {
   return (
     <>
       {/* image and links */}
-      <div className="flex flex-col md:flex-row justify-center items-center mb-4 relative">
+      <div className="flex flex-col md:flex-row justify-center items-center mt-32 mb-4 relative">
         <div className="text-center md:w-[20rem] w-[15rem]">
           <p className="pb-8 text-xl font-bold">{data.strMeal}</p>
           <img
