@@ -20,18 +20,15 @@ function Saved() {
   console.log(data);
 
   const handleDelete = (id) => {
-    const savedRecipes = JSON.parse(localStorage.getItem("recipe"));
-    if (savedRecipes) {
-      const updatedRecipe = savedRecipes.filter((item) => item.idMeal !== id);
-      localStorage.setItem("recipe", JSON.stringify(updatedRecipe));
-    }
-
-    window.location.reload();
+    const updatedRecipe = data.filter((item) => item.idMeal !== id);
+    setData(updatedRecipe);
+    localStorage.setItem("recipe", JSON.stringify(updatedRecipe));
+    alert("Recipe Deleted");
   };
 
   if (data.length === 0 && !isLoading) {
     return (
-      <div className="flex justify-center items-center m-20 text-lg sm:text-2xl font-bold">
+      <div className="flex justify-center items-center m-40 text-lg sm:text-2xl font-bold">
         No recipe found
       </div>
     );

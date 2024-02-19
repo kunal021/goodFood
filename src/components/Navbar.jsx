@@ -1,11 +1,16 @@
 // eslint-disable-next-line react/prop-types
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import bar from "../assets/bar.svg";
 import x from "../assets/x.svg";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+
+  const location = useLocation();
+  useEffect(() => {
+    setOpen(false);
+  }, [location]);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -18,11 +23,14 @@ function Navbar() {
           <img
             src="/logo.jpeg"
             alt="logo"
-            className="rounded-full h-20 w-20 cursor-pointer"
+            className="rounded-full h-16 w-16 cursor-pointer"
           ></img>
         </Link>
         <div className="flex justify-center items-center">
           <ul className="flex justify-center items-center gap-6 mr-6">
+            <Link to="/">
+              <li className="text-xl font-medium cursor-pointer">Home</li>
+            </Link>
             <Link to="/saved">
               <li className="text-xl font-medium cursor-pointer">Saved</li>
             </Link>
@@ -40,7 +48,7 @@ function Navbar() {
             <img
               src="/logo.jpeg"
               alt="logo"
-              className="rounded-full h-20 w-20 cursor-pointer absolute top-4 left-12"
+              className="rounded-full h-16 w-16 cursor-pointer absolute top-4 left-12"
             ></img>
           </Link>
           <div className="flex justify-center flex-col mt-8 items-center">
@@ -51,19 +59,25 @@ function Navbar() {
               } w-36 py-2`}
             >
               {open ? (
-                <img src={x} className="h-10 w-10" />
+                <img src={x} className="h-8 w-8" />
               ) : (
-                <img src={bar} className="h-10 w-10" />
+                <img src={bar} className="h-8 w-8" />
               )}
             </button>
             {open && (
               <div className="flex flex-col justify-center items-center bg-amber-300/90 w-36">
                 <ul className="flex flex-col justify-center items-center py-2">
+                  <Link to="/">
+                    <li className="text-xl font-medium cursor-pointer py-2">
+                      Home
+                    </li>
+                  </Link>
                   <Link to="/saved">
                     <li className="text-xl font-medium cursor-pointer py-2">
                       Saved
                     </li>
                   </Link>
+
                   {/* <li className="text-xl font-medium cursor-pointer py-2">
                     Japanese
                   </li>

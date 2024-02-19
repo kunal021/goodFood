@@ -10,7 +10,7 @@ function Hero() {
         <img
           src={hero}
           alt="hero-1.png"
-          className="xl:h-[35rem] xl:w-[35rem] lg:h-[30rem] lg:w-[30rem] md:h-[25rem] md:w-[25rem] h-[20rem] w-[20rem]"
+          className="lg:h-[30rem] lg:w-[30rem] md:h-[25rem] md:w-[25rem] h-[20rem] w-[20rem]"
         />
       </main>
     </div>

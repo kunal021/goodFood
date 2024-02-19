@@ -69,6 +69,7 @@ function Data({ query }) {
     const isDuplicate = save.some((el) => el.idMeal === data.idMeal);
     if (!isDuplicate) {
       setSave((prevSave) => [...prevSave, data]);
+      alert("Recipe Saved");
     } else if (isDuplicate) {
       alert("Already Saved");
     } else {
