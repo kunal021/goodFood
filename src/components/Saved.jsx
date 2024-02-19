@@ -1,63 +1,35 @@
-/* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { InfinitySpin } from "react-loader-spinner";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { InfinitySpin } from "react-loader-spinner";
 
-function Data({ query }) {
-  const [recipe, setRecipe] = useState([]);
+function Saved() {
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [save, setSave] = useState([]);
-
-  console.log(save);
 
   useEffect(() => {
-    async function getRecipe() {
-      let URL;
+    setIsLoading(true);
+    // Retrieve data from local storage
+    const storedData = localStorage.getItem("recipe");
 
-      if (query.trim() != "") {
-        if (query.length === 1) {
-          URL = `https://www.themealdb.com/api/json/v1/1/search.php?f=${query}`;
-        } else {
-          URL = `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`;
-        }
-        try {
-          setIsLoading(true);
-          const res = await axios.get(URL);
-          console.log(res.data);
-          setRecipe(res.data.meals);
-          setIsLoading(false);
-        } catch (err) {
-          console.log(err);
-          setIsLoading(false);
-        }
-      }
+    if (storedData) {
+      setData(JSON.parse(storedData));
     }
-
-    getRecipe();
-  }, [query]);
-
-  useEffect(() => {
-    // Load saved recipes from localStorage
-    const savedRecipes = JSON.parse(localStorage.getItem("recipe"));
-    if (savedRecipes) {
-      setSave(savedRecipes);
-    }
+    setIsLoading(false);
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("recipe", JSON.stringify(save));
-  }, [save]);
+  console.log(data);
 
-  if (query.trim() === "") {
-    return (
-      <div className="flex justify-center items-center text-center m-20 text-lg sm:text-2xl font-bold">
-        Please enter the recipe name
-      </div>
-    );
-  }
+  const handleDelete = (id) => {
+    const savedRecipes = JSON.parse(localStorage.getItem("recipe"));
+    if (savedRecipes) {
+      const updatedRecipe = savedRecipes.filter((item) => item.idMeal !== id);
+      localStorage.setItem("recipe", JSON.stringify(updatedRecipe));
+    }
 
-  if (recipe === null && !isLoading) {
+    window.location.reload();
+  };
+
+  if (data.length === 0 && !isLoading) {
     return (
       <div className="flex justify-center items-center m-20 text-lg sm:text-2xl font-bold">
         No recipe found
@@ -65,21 +37,10 @@ function Data({ query }) {
     );
   }
 
-  const handleSave = (data) => {
-    const isDuplicate = save.some((el) => el.idMeal === data.idMeal);
-    if (!isDuplicate) {
-      setSave((prevSave) => [...prevSave, data]);
-    } else if (isDuplicate) {
-      alert("Already Saved");
-    } else {
-      return;
-    }
-  };
-
   return (
     <div className="bg-amber-300 flex flex-col flex-wrap justify-center items-center">
-      <div className="mt-20 text-xl sm:text-2xl font-bold">
-        Total results found: {recipe.length}
+      <div className="mt-24 mb-4 text-xl sm:text-2xl font-bold">
+        Total saved recipes {data.length}
       </div>
       <div className="flex flex-wrap justify-center items-center">
         {isLoading ? (
@@ -92,7 +53,7 @@ function Data({ query }) {
             />
           </div>
         ) : (
-          recipe.map((data) => (
+          data.map((data) => (
             <div
               key={data.idMeal}
               className="m-10 flex flex-col flex-wrap justify-center items-center border-4 border-black rounded-3xl bg-white"
@@ -112,12 +73,11 @@ function Data({ query }) {
                 >
                   Details
                 </Link>
-
                 <button
-                  onClick={() => handleSave(data)}
+                  onClick={() => handleDelete(data.idMeal)}
                   className="flex flex-wrap justify-center text-center items-center px-3 py-2 mb-6 text-l font-bold border-4 border-black rounded-2xl hover:bg-amber-300"
                 >
-                  Save
+                  Delete
                 </button>
               </div>
             </div>
@@ -128,4 +88,4 @@ function Data({ query }) {
   );
 }
 
-export default Data;
+export default Saved;

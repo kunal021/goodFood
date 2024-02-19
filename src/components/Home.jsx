@@ -6,7 +6,7 @@ import Data from "./Data";
 // eslint-disable-next-line react/prop-types
 function Home({ input, setInput, query, setQuery }) {
   return (
-    <div>
+    <div className="mt-32">
       <Hero />
       <Input input={input} setInput={setInput} setQuery={setQuery} />
       <Data query={query} />

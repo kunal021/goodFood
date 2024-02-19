@@ -23,13 +23,15 @@ function Navbar() {
         </Link>
         <div className="flex justify-center items-center">
           <ul className="flex justify-center items-center gap-6 mr-6">
-            <li className="text-xl font-medium cursor-pointer">Indian</li>
-            <li className="text-xl font-medium cursor-pointer">Japanese</li>
-            <li className="text-xl font-medium cursor-pointer">Itailan</li>
+            <Link to="/saved">
+              <li className="text-xl font-medium cursor-pointer">Saved</li>
+            </Link>
+            {/* <li className="text-xl font-medium cursor-pointer">Japanese</li> */}
+            {/* <li className="text-xl font-medium cursor-pointer">Itailan</li> */}
           </ul>
-          <button className="text-2xl font-semibold border-4 rounded-2xl border-black px-4 py-2">
+          {/* <button className="text-2xl font-semibold border-4 rounded-2xl border-black px-4 py-2">
             search
-          </button>
+          </button> */}
         </div>
       </nav>
       {
@@ -57,19 +59,21 @@ function Navbar() {
             {open && (
               <div className="flex flex-col justify-center items-center bg-amber-300/90 w-36">
                 <ul className="flex flex-col justify-center items-center py-2">
-                  <li className="text-xl font-medium cursor-pointer py-2">
-                    Indian
-                  </li>
-                  <li className="text-xl font-medium cursor-pointer py-2">
+                  <Link to="/saved">
+                    <li className="text-xl font-medium cursor-pointer py-2">
+                      Saved
+                    </li>
+                  </Link>
+                  {/* <li className="text-xl font-medium cursor-pointer py-2">
                     Japanese
                   </li>
                   <li className="text-xl font-medium cursor-pointer py-2">
                     Itailan
-                  </li>
+                  </li> */}
                 </ul>
-                <button className=" text-2xl font-semibold border-4 rounded-2xl border-black px-4 py-2 mb-2">
+                {/* <button className=" text-2xl font-semibold border-4 rounded-2xl border-black px-4 py-2 mb-2">
                   search
-                </button>
+                </button> */}
               </div>
             )}
           </div>
